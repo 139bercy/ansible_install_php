@@ -1,0 +1,28 @@
+---
+# Add epel-release repo
+- name: Add epel-release repo
+  yum:
+    name: epel-release
+    state: present
+# Add zip/unzip
+- name: Add zip/unzip
+  yum:
+    name: "{{ zip_packages }}"
+    state: present
+# Add remi-release repo
+- name: Add remi-release repo
+  yum:
+    name: "{{ remi_repo_url }}"
+    state: present
+# Install PHP 7.4
+- name: Install PHP 7.4
+  yum:
+    name: php
+    state: present
+    enablerepo: "remi-php74"
+# Install PHP Modules
+- name: Add PHP Modules
+  yum:
+    name: "{{ php_modules }}"
+    state: present
+    enablerepo: "remi-php74"
