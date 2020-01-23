@@ -9,20 +9,33 @@
   yum:
     name: "{{ zip_packages }}"
     state: present
-# Add remi-release repo
-- name: Add remi-release repo
+
+# Install PHP Rpm
+- name: Create temporary directory
+  file:
+    path: /tmp/rpm
+    state: directory
+
+- name: copy Rpm to temporary
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/rpm
+  with_fileglob:
+    - "../files/rpm/*.rpm"
+  register: rpms_copied
+
+- set_fact:
+    rpm_list: "{{ rpms_copied.results | map(attribute='dest') | list }}"
+
+- name: install RPMs
   yum:
-    name: "{{ remi_repo_url }}"
-    state: present
-# Install PHP 7.4
-- name: Install PHP 7.4
-  yum:
-    name: php
-    state: present
-    enablerepo: "remi-php74"
-# Install PHP Modules
-- name: Add PHP Modules
-  yum:
-    name: "{{ php_modules }}"
-    state: present
-    enablerepo: "remi-php74"
+    name: "{{ rpm_list }}"
+
+# Install Composer
+- name: Install Composer
+  copy:
+    src: composer.phar
+    dest: /usr/bin/composer
+    owner: root
+    group: root
+    mode: '0755'
