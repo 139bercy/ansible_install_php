@@ -9,28 +9,22 @@
   yum:
     name: "{{ zip_packages }}"
     state: present
-
-# Install PHP Rpm
-- name: Create temporary directory
-  file:
-    path: /tmp/rpm
-    state: directory
-
-- name: copy Rpm to temporary
-  copy:
-    src: "{{ item }}"
-    dest: /tmp/rpm
-  with_fileglob:
-    - "../files/rpm/*.rpm"
-  register: rpms_copied
-
-- set_fact:
-    rpm_list: "{{ rpms_copied.results | map(attribute='dest') | list }}"
-
-- name: install RPMs
+# Add Software Collections
+- name: Add Software Collections
   yum:
-    name: "{{ rpm_list }}"
-
+    name: centos-release-scl.noarch
+    state: present
+# Install PHP 7.3
+- name: Install PHP 7.3
+  yum:
+    name: rh-php73
+    state: present
+# Enable PHP with link
+- name: Enable PHP with link
+  file:
+    src: /opt/rh/rh-php73/root/usr/bin/php
+    dest: /usr/bin/php
+    state: link
 # Install Composer
 - name: Install Composer
   copy:
