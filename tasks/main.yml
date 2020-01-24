@@ -14,21 +14,21 @@
   yum:
     name: centos-release-scl.noarch
     state: present
-# Install PHP 7.3
-- name: Install PHP 7.3
+# Install PHP 7.2
+- name: Install PHP 7.2
   yum:
     name: "{{ php_packages }}"
     state: present
 # Enable PHP CLI with link
 - name: Enable PHP CLI with link
   file:
-    src: /opt/rh/rh-php73/root/usr/bin/php
+    src: /opt/rh/rh-php72/root/usr/bin/php
     dest: /usr/bin/php
     state: link
 # Start Php-FPM
 - name: Start
   systemd:
-    name: rh-php73-php-fpm
+    name: rh-php72-php-fpm
     state: started
     enabled: yes
 # Copie php-fpm.conf template     

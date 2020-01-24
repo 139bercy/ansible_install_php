@@ -3,10 +3,10 @@ zip_packages:
   - zip
   - unzip
 php_packages:
- - rh-php73
- - rh-php73-php-xml
- - rh-php73-php-mbstring
- - rh-php73-php-gd
- - rh-php73-php-soap
- - rh-php73-php-mysqlnd
- - rh-php73-php-fpm
+ - rh-php72
+ - rh-php72-php-xml
+ - rh-php72-php-mbstring
+ - rh-php72-php-gd
+ - rh-php72-php-soap
+ - rh-php72-php-mysqlnd
+ - rh-php72-php-fpm
