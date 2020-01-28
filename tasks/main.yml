@@ -25,7 +25,7 @@
     path: /etc/opt/rh/rh-php73/php.ini
     section: PHP
     option: memory_limit
-    value: 1024M
+    value: "{{ php_memory_limit }}"
 # Enable PHP CLI with link
 - name: Enable PHP CLI with link
   file:
@@ -51,7 +51,7 @@
 - name: Install Composer
   copy:
     src: composer.phar
-    dest: /usr/bin/composer
+    dest: "{{ composer_bin }}"
     owner: root
     group: root
     mode: '0755'
