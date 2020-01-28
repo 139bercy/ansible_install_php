@@ -11,5 +11,5 @@ php_packages:
  - rh-php73-php-mysqlnd
  - rh-php73-php-fpm
 php_memory_limit: 1024M
-composer_bin: /usr/bin/composer
+composer_home: /usr/bin/composer
  

@@ -51,7 +51,7 @@
 - name: Install Composer
   copy:
     src: composer.phar
-    dest: "{{ composer_bin }}"
+    dest: "{{ composer_home }}"
     owner: root
     group: root
     mode: '0755'
